@@ -11,43 +11,53 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-      db.Cart.hasMany(db.product,{forgenKey:"card_id"})
-    }
+    // static associate(models) {
+    //   // define association here
+    //   db.Cart.belongsTo(db.product,{foreignkey:"card_id"})
+      
+    // }
+
+    // static associate(models) {
+    //   // define association here
+    //   db.Cart.belongsTo(db.Product, {
+    //     foreignKey: "card_id",
+    //     constraints: false,
+    //   });
+    // }
+  
   }
   Cart.init({
     card_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       user_id: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       product_id: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       quantity: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     
   }, {
     sequelize,
     modelName: 'Cart',
-    tableName:'carts'
+    tableName:'carts',
   });
   return Cart;
 }

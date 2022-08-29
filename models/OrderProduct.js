@@ -18,29 +18,27 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     order_id: {
       allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     product_id: {
       allowNull: false,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     quantity: {
       allowNull: false,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
     
   }, {

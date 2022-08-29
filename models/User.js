@@ -12,35 +12,35 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-      db.User.hasMany(db.order,{forgenKey:"user_id"})
-      db.User.hasMany(db.cart,{forgenKey:"user_id"})
-    }
+    // static associate(models) {
+    //   // define association here
+    //   db.User.hasMany(db.order,{forgenKey:"user_id"})
+    //   db.User.hasMany(db.cart,{forgenKey:"user_id"})
+    // }
   }
   User.init({
     user_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       email: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         require:true,
         allowNull: false,
       },
       password: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     
   }, {

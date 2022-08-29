@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      card_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -21,10 +25,9 @@ module.exports = {
         allowNull: false,
       },
       status: {
-        type: Sequelize.tinyint(1),
-        default:1,
+        type: Sequelize.STRING,
+        default:"available",
         allowNull:false,
-        Comment: '0= unavailable, 2 Available'
       },
       price: {
         type: Sequelize.INTEGER,

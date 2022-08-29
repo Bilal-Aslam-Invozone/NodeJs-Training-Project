@@ -18,38 +18,38 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       name: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       email:{
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         require:true,
         allowNull: false,
       },
       contact: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         require:true
 
       },
       cover_img: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         require:true
         
       },
       about_content: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         require:true
         
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     
   }, {

@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const db = require('./index');
+db.order_product = require('./OrderProduct');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -9,50 +11,50 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
+    // static associate(models) {
+    //   // define association here
+    //   db.Order.belongToMany(db.order_product,{through:"OrderProduct"})
+    // }
   }
   Product.init({
     product_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
-      category_id: {
+      card_id: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       name: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       description: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       img_path: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       status: {
-        type: Sequelize.tinyint(1),
-        default:1,
+        type: DataTypes.STRING,
+        default:"available",
         allowNull:false,
-        Comment: '0= unavailable, 2 Available'
       },
       price: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
   }, {
     sequelize,
