@@ -1,50 +1,47 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class OrderProduct extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
+'use strict'
+const Sequelize = require('sequelize');
+
+const sequelize=require('./sequelize_index').sequelize;
+const instanceMethods = {
+    toJSON() {
+        const values = Object.assign({}, this.get());
+
+        return values;
+    },
+};
+
+const OrderProduct = sequelize.define('order_products', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
+  orderId: {
+    allowNull: false,
+    type: Sequelize.INTEGER
+  },
+  productId: {
+    allowNull: false,
+    type: Sequelize.INTEGER
+  },
+  quantity: {
+    allowNull: false,
+    type: Sequelize.INTEGER
+  },
+  createdAt: {
+    allowNull: false,
+    type: Sequelize.DATE
+  },
+  updatedAt: {
+    allowNull: false,
+    type: Sequelize.DATE
   }
-  OrderProduct.init({
-    order_product_id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
-    },
-    order_id: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-    product_id: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-    quantity: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    }
-    
-  }, {
-    sequelize,
-    modelName: 'OrderProduct',
-    tableName:'order_products'
-  });
-  return OrderProduct;
-}
+
+}, { instanceMethods });
+
+module.exports = OrderProduct;
+
+
+
+

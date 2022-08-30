@@ -5,26 +5,26 @@ module.exports = {
     return queryInterface.bulkInsert('product_orders', [
       {
         
-        ProductOrder_id: 1,
-        order_product_id: 1,
-        order_id: 1,
-        product_id:1,
+        id: 1,
+        orderProductId: 1,
+        orderId: 1,
+        productId:1,
         createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      ProductOrder_id: 2,
-      order_product_id: 1,
-      order_id: 1,
-      product_id:3,
+      id: 2,
+      orderProductId: 1,
+      orderId: 1,
+      productId:3,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-        ProductOrder_id: 3,
-        order_product_id: 2,
-        order_id: 2,
-        product_id:3,
+        id: 3,
+        orderProductId: 2,
+        orderId: 2,
+        productId:3,
         createdAt: new Date(),
       updatedAt: new Date()
     }

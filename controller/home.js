@@ -1,6 +1,5 @@
 const db = require("../models");
 const User = db.User;
-const Op = db.Sequelize.Op;
 module.exports = {
   async index(req, res) {
     try {
@@ -19,6 +18,24 @@ module.exports = {
       .then((users) => res.status(200).send(users))
       .catch((error) => { res.status(400).send(error); });
   },
+  getById(req, res) {
+    return User
+      .findByPk(req.params.id, {
+      })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            message: 'User Not Found',
+          });
+        }
+        return res.status(200).send(user);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(400).send(error);
+      });
+  },
+
 AddUser(req, res) {
   try {
     const user = {

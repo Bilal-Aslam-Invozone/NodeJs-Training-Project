@@ -1,36 +1,45 @@
 'use strict';
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
-const db = {};
+const sequelize = require('./sequelize_index').sequelize;
+const User = require('./User')
+const Cart = require('./Cart');
+const Order = require('./Order');
+const Product = require('./Product');
+const OrderProduct = require('./OrderProduct');
+const ProductOrder = require('./ProductOrder')
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+// Association One-To-Many (User-Cart-Table)
+User.hasMany(Cart,{
+    foreignkey:'user_id',
+    as : 'cartInfo'
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+Cart.belongsTo(User,{foreignkey:"user_id", as:'userInfo'});
 
-module.exports = db;
+// Association One-To-Many (Cart-Product-Table)
+Cart.hasMany(Product,{foreignkey:"user_id"});
+Product.belongsTo(Cart,{foreignkey:"user_id"});
+
+
+// Association One-To-Many (User-Order-Table)
+User.hasMany(Order,{foreignkey:"user_id"});
+Order.belongsTo(User,{foreignkey:"user_id"});
+
+
+// Association Many-To-Many (Order-OrderProduct-Table)
+Order.belongsToMany(OrderProduct, { through: ProductOrder });
+OrderProduct.belongsToMany(Order, { through: ProductOrder });
+
+// Association Many-To-Many (Product-OrderProduct-Table)
+Product.belongsToMany(OrderProduct, { through: ProductOrder});
+OrderProduct.belongsToMany(Product, { through: ProductOrder });
+
+
+sequelize.sync({force: false}).then(function () {
+    console.log("Database Configured");
+});
+module.exports = {User, Cart};
+
+
+
+
+

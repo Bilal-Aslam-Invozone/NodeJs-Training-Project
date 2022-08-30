@@ -1,52 +1,40 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const db = require('./index');
-db.order = require('./Order');
-db.cart= require("./Cart");
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    // static associate(models) {
-    //   // define association here
-    //   db.User.hasMany(db.order,{forgenKey:"user_id"})
-    //   db.User.hasMany(db.cart,{forgenKey:"user_id"})
-    // }
-  }
-  User.init({
-    user_id: {
+const Sequelize = require('sequelize');
+const sequelize=require('./sequelize_index').sequelize;
+const db = require('./index.js'); //This is an instance of new Sequelize(...)
+
+const tableName = 'users';
+
+const User = sequelize.define('user', {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
+      },
+      userType: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       email: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         require:true,
         allowNull: false,
       },
       password: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       }
-    
-  }, {
-    sequelize,
-    modelName: 'User',
-    tableName:'users'
-  });
-  return User;
-}
+
+}, { tableName });
+
+module.exports = User;
+
+

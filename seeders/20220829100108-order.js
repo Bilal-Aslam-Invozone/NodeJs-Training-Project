@@ -8,8 +8,8 @@ module.exports = {
 
 
       {
-        order_id: 1,
-        user_id: 1,
+        id: 1,
+        userId: 1,
         name: "Bilal Aslam",
         email: "bilal.aslam@invozone.com",
         address: "Faisalabaad",
@@ -19,8 +19,8 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      order_id: 2,
-        user_id: 1,
+      id: 2,
+        userId: 1,
         name: "Bilal Aslam",
         email: "bilal.aslam@invozone.com",
         address: "Faisalabaad",
@@ -30,8 +30,8 @@ module.exports = {
         updatedAt: new Date()
     },
     {
-      order_id: 3,
-        user_id: 1,
+      id: 3,
+        userId: 1,
         name: "Bilal Aslam",
         email: "bilal.aslam@invozone.com",
         address: "Faisalabaad",

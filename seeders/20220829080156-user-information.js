@@ -4,21 +4,24 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('users', [
       {
-        user_id: 1,
+        id: 1,
+        userType: "Admin",
         email: 'bilal.aslam@invozone.com',
         password: 'bilal@1201', 
         createdAt: new Date(),
         updatedAt: new Date()
     },
     {
-      user_id: 2,
+      id: 2,
+      userType: "Customer",
         email: 'hamza@invozone.com',
         password: 'hamza@1201', 
         createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      user_id: 3,
+      id: 3,
+      userType: "Customer",
         email: 'islam@invozone.com',
         password: 'islam@1201', 
         createdAt: new Date(),

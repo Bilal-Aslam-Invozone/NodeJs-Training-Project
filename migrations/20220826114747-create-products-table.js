@@ -2,13 +2,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('products', {
-      product_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      card_id: {
+      cardId: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      img_path: {
+      imgPath: {
         type: Sequelize.TEXT,
         allowNull: false,
       },

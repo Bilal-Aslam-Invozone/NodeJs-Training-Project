@@ -2,7 +2,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('system_settings', {
-      system_setting_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -21,12 +21,12 @@ module.exports = {
         require:true
 
       },
-      cover_img: {
+      coverImg: {
         type: Sequelize.TEXT,
         require:true
         
       },
-      about_content: {
+      aboutContent: {
         type: Sequelize.TEXT,
         require:true
         

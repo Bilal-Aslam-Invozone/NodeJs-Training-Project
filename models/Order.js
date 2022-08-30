@@ -1,68 +1,58 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const db = require('./index');
-db.order_product = require('./OrderProduct');
-module.exports = (sequelize, DataTypes) => {
-  class Order extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    // static associate(models) {
-    //   // define association here
-    //   db.Order.belongToMany(db.order_product,{through:"OrderProduct"})
-    // }
-  }
-  Order.init({
-    order_id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
-      },
-      user_id: {
-        allowNull: false,
-        type: DataTypes.INTEGER
-      },
-      name: {
-        type: DataTypes.STRING,
-      },
-      email:{
-        type: DataTypes.STRING,
-        require:true,
-        allowNull: false,
-      },
-      address: {
-        type: DataTypes.STRING,
-        require:true
+'use strict'
+const Sequelize = require('sequelize');
 
-      },
-      mobile: {
-        type: DataTypes.STRING,
-        require:true,
-        allowNull: false,
-      },
-      status: {
-        type: DataTypes.BOOLEAN,
-        default:true,
-        allowNull:false,
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      }
-    
-  }, {
-    sequelize,
-    modelName: 'Order',
-    tableName:'orders'
-  });
-  return Order;
-}
+const sequelize=require('./sequelize_index').sequelize;
+const instanceMethods = {
+    toJSON() {
+        const values = Object.assign({}, this.get());
+
+        return values;
+    },
+};
+
+const Order = sequelize.define('orders', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
+  userId: {
+    allowNull: false,
+    type: Sequelize.INTEGER
+  },
+  name: {
+    type: Sequelize.STRING,
+  },
+  email:{
+    type: Sequelize.STRING,
+    require:true,
+    allowNull: false,
+  },
+  address: {
+    type: Sequelize.STRING,
+    require:true
+
+  },
+  mobile: {
+    type: Sequelize.STRING,
+    require:true,
+    allowNull: false,
+  },
+  status: {
+    type: Sequelize.BOOLEAN,
+    default:true,
+    allowNull:false,
+  },
+  createdAt: {
+    allowNull: false,
+    type: Sequelize.DATE
+  },
+  updatedAt: {
+    allowNull: false,
+    type: Sequelize.DATE
+  }
+
+}, { instanceMethods });
+
+module.exports = Order;

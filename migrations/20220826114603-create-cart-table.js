@@ -2,17 +2,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('carts', {
-      card_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      product_id: {
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
