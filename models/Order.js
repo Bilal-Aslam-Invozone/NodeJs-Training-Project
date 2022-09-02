@@ -1,58 +1,60 @@
-'use strict'
-const Sequelize = require('sequelize');
+"use strict";
+const Sequelize = require("sequelize");
 
-const sequelize=require('./sequelize_index').sequelize;
+const sequelize = require("./sequelize_index").sequelize;
 const instanceMethods = {
-    toJSON() {
-        const values = Object.assign({}, this.get());
+  toJSON() {
+    const values = Object.assign({}, this.get());
 
-        return values;
-    },
+    return values;
+  },
 };
 
-const Order = sequelize.define('orders', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER
+const Order = sequelize.define(
+  "orders",
+  {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
+    userId: {
+      allowNull: false,
+      type: Sequelize.INTEGER,
+    },
+    name: {
+      type: Sequelize.STRING,
+    },
+    email: {
+      type: Sequelize.STRING,
+      require: true,
+      allowNull: false,
+    },
+    address: {
+      type: Sequelize.STRING,
+      require: true,
+    },
+    mobile: {
+      type: Sequelize.STRING,
+      require: true,
+      allowNull: false,
+    },
+    status: {
+      type: Sequelize.BOOLEAN,
+      default: true,
+      allowNull: false,
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
   },
-  userId: {
-    allowNull: false,
-    type: Sequelize.INTEGER
-  },
-  name: {
-    type: Sequelize.STRING,
-  },
-  email:{
-    type: Sequelize.STRING,
-    require:true,
-    allowNull: false,
-  },
-  address: {
-    type: Sequelize.STRING,
-    require:true
-
-  },
-  mobile: {
-    type: Sequelize.STRING,
-    require:true,
-    allowNull: false,
-  },
-  status: {
-    type: Sequelize.BOOLEAN,
-    default:true,
-    allowNull:false,
-  },
-  createdAt: {
-    allowNull: false,
-    type: Sequelize.DATE
-  },
-  updatedAt: {
-    allowNull: false,
-    type: Sequelize.DATE
-  }
-
-}, { instanceMethods });
+  { instanceMethods }
+);
 
 module.exports = Order;

@@ -1,50 +1,49 @@
 const express = require("express");
 
 const userController = require("../controller/userController");
-
+const productController = require("../controller/productController");
+const { check } = require("express-validator");
+const auth = require("../middleware/credentials");
+const checkUserType = require("../middleware/checkUserType");
 const router = express.Router();
 
+/* User Router */
 router.get("/", userController.index);
+router.get("/getAllUsers", checkUserType, userController.getAllUsers);
+router.get("/user/:id", auth, userController.getOneUser);
+router.post(
+  "/createUser",
+  [
+    check("email", "Please Enter Valid Email").isEmail(),
+    check(
+      "password",
+      "Please enter valid password that is greater than 6 charecter"
+    ).isLength({ min: 6 }),
+  ],
+  userController.AddUser
+);
+router.post("/loginUser", userController.loginUser);
+router.put("/updateUser/:id", checkUserType, userController.updateUser);
+router.delete("/deleteUser/:id", checkUserType, userController.deleteUser);
+/* get user carts */
+router.get("/getUserCarts/:id", auth, userController.getUserCarts);
+/* get user Order */
+router.get("/getUserOrders/:id", auth, userController.getUserOrder);
 
-//   /* User Routes */
-    router.get("/getAllUsers", userController.getAllUsers);
-    router.get('/user/:id', userController.getOneUser);
-    router.post('/createUser', userController.AddUser);
-    router.put('/updateUser/:id', userController.updateUser);
-    router.delete('/deleteUser/:id', userController.deleteUser)
-// get user carts
-router.get('/getUserCarts/:id', userController.getUserCarts);
-  /* Product Router */
-// router.get('/api/classroom', classroomController.list);
-// router.get('/api/classroom/:id', classroomController.getById);
-// router.post('/api/classroom', classroomController.add);
-// router.put('/api/classroom/:id', classroomController.update);
-// router.delete('/api/classroom/:id', classroomController.delete);
-
-/* Student Router */
-// router.get('/api/student', studentController.list);
-// router.get('/api/student/:id', studentController.getById);
-// router.post('/api/student', studentController.add);
-// router.put('/api/student/:id', studentController.update);
-// router.delete('/api/student/:id', studentController.delete);
-
-/* Lecturer Router */
-// router.get('/api/lecturer', lecturerController.list);
-// router.get('/api/lecturer/:id', lecturerController.getById);
-// router.post('/api/lecturer', lecturerController.add);
-// router.put('/api/lecturer/:id', lecturerController.update);
-// router.delete('/api/lecturer/:id', lecturerController.delete);
-
-/* Course Router */
-// router.get('/api/course', courseController.list);
-// router.get('/api/course/:id', courseController.getById);
-// router.post('/api/course', courseController.add);
-// router.put('/api/course/:id', courseController.update);
-// router.delete('/api/course/:id', courseController.delete);
-
-/* Advance Router */
-// router.post('/api/student/add_course', studentController.addCourse);
-// router.post('/api/classroom/add_with_students', classroomController.addWithStudents);
-// router.post('/api/lecturer/add_with_course', lecturerController.addWithCourse);
+/* Product Router */
+router.get("/testProduct", productController.index);
+router.get("/getAllProducts", checkUserType, productController.getAllProducts);
+router.get("/product/:id", auth, productController.getOneProduct);
+router.post("/createProduct", checkUserType, productController.AddProduct);
+router.put(
+  "/updateProduct/:id",
+  checkUserType,
+  productController.updateProduct
+);
+router.delete(
+  "/deleteProduct/:id",
+  checkUserType,
+  productController.deleteProduct
+);
 
 module.exports = router;

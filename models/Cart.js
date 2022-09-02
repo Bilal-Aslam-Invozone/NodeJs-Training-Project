@@ -1,13 +1,13 @@
 'use strict'
 const Sequelize = require('sequelize');
 
-const sequelize=require('./sequelize_index').sequelize;
+const sequelize = require('./sequelize_index').sequelize;
 const instanceMethods = {
-    toJSON() {
-        const values = Object.assign({}, this.get());
+  toJSON() {
+    const values = Object.assign({}, this.get());
 
-        return values;
-    },
+    return values;
+  },
 };
 
 const Cart = sequelize.define('carts', {
@@ -18,6 +18,10 @@ const Cart = sequelize.define('carts', {
     type: Sequelize.INTEGER
   },
   userId: {
+    allowNull: false,
+    type: Sequelize.INTEGER
+  },
+  productId: {
     allowNull: false,
     type: Sequelize.INTEGER
   },
